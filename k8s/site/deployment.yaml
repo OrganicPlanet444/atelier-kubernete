@@ -8,10 +8,10 @@ metadata:
   labels:
     app: site
 spec:
-  replicas: 1                      # Exercice 5 : vous changerez cette valeur
+  replicas: 3                      # Exercice 5 : vous changerez cette valeur
   selector:
     matchLabels:
-      app: TODO                    # doit correspondre aux labels du template ci-dessous
+      app: site                    # doit correspondre aux labels du template ci-dessous
   template:
     metadata:
       labels:
@@ -19,13 +19,13 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: TODO              # utilisez nginx:1.27 (version précise, pas "latest")
+          image: nginx:1.27              # utilisez nginx:1.27 (version précise, pas "latest")
           ports:
-            - containerPort: TODO  # le port sur lequel nginx écoute
+            - containerPort: 80  # le port sur lequel nginx écoute
           volumeMounts:
             - name: html
-              mountPath: TODO      # le dossier servi par nginx (cf. exercice 3)
+              mountPath: /usr/share/nginx/html      # le dossier servi par nginx (cf. exercice 3)
       volumes:
         - name: html
           configMap:
-            name: TODO             # le nom de la ConfigMap de configmap.yaml
+            name: site-html             # le nom de la ConfigMap de configmap.yaml
